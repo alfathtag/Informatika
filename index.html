@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Produksi Bingkai Foto Kardus</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #28a745, #ffcc00, #00aaff);
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .result {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result p {
+            margin: 5px 0;
+        }
+
+        .info {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .info p {
+            font-size: 1.2rem;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Kalkulator Bingkai Foto dari Kardus</h2>
+        <label for="berat">Masukkan berat kardus (kg):</label>
+        <input type="number" id="berat" placeholder="Masukkan berat kardus (kg)">
+        <button onclick="hitung()">Hitung Produk dan Total</button>
+
+        <div class="result" id="result">
+            <p>Jumlah Total Produk: <span id="jumlah-produk"></span></p>
+            <p>Uang Hasil Penjualan: Rp <span id="hasil-penjualan"></span></p>
+            <p>Total Modal: Rp <span id="total-modal"></span></p>
+            <p>Total Keuntungan: Rp <span id="total-untung"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function hitung() {
+            var beratKardus = document.getElementById("berat").value;
+
+            // Angka tetap: 1 kg kardus menghasilkan 10 bingkai foto
+            var barangPerKg = 10;
+
+            // Hitung jumlah produk yang dapat dihasilkan
+            var jumlahTotalProduk = beratKardus * barangPerKg;
+            document.getElementById("jumlah-produk").innerHTML = jumlahTotalProduk;
+
+            // Hitung hasil penjualan
+            var hargaPerProduk = 25000;  // Harga jual per bingkai foto
+            var hasilPenjualan = jumlahTotalProduk * hargaPerProduk;
+            document.getElementById("hasil-penjualan").innerHTML = hasilPenjualan;
+
+            // Hitung modal
+            var modalPerProduk = 5000;  // Modal produksi per bingkai foto
+            var totalModal = jumlahTotalProduk * modalPerProduk;
+            document.getElementById("total-modal").innerHTML = totalModal;
+
+            // Hitung keuntungan
+            var totalUntung = hasilPenjualan - totalModal;
+            document.getElementById("total-untung").innerHTML = totalUntung;
+
+            // Tampilkan hasil
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+</body>
+</html>
