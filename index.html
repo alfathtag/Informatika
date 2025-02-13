@@ -1,120 +1,152 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Produksi Bingkai Foto Kardus</title>
+    <title>Jual Produk Non-Organik per Kg</title>
     <style>
         body {
-            background: linear-gradient(to bottom, #28a745, #ffcc00, #00aaff);
-            background-size: cover;
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #009688, #4CAF50);
+            color: white;
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            margin: 50px auto;
             padding: 20px;
-            width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+
+        h1 {
             text-align: center;
+            color: #009688;
         }
 
-        h2 {
-            margin-bottom: 20px;
-            color: #28a745;
-        }
-
-        input {
+        table {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            margin-top: 20px;
+            border-collapse: collapse;
         }
 
-        button {
-            background-color: #28a745;
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #009688;
             color: white;
-            padding: 10px;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+        }
+
+        .total {
+            font-weight: bold;
+            color: #009688;
+        }
+
+        .btn {
+            background-color: #009688;
+            color: white;
             border: none;
-            border-radius: 5px;
+            padding: 10px 20px;
             cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        .result {
             margin-top: 20px;
-            display: none;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .result p {
-            margin: 5px 0;
+        .btn:hover {
+            background-color: #00796b;
         }
 
-        .info {
-            display: none;
-            margin-top: 20px;
+        .contact {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
         }
 
-        .info p {
-            font-size: 1.2rem;
-            color: #28a745;
+        .contact a {
+            color: #009688;
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h2>Kalkulator Bingkai Foto dari Kardus</h2>
-        <label for="berat">Masukkan berat kardus (kg):</label>
-        <input type="number" id="berat" placeholder="Masukkan berat kardus (kg)">
-        <button onclick="hitung()">Hitung Produk dan Total</button>
 
-        <div class="result" id="result">
-            <p>Jumlah Total Produk: <span id="jumlah-produk"></span></p>
-            <p>Uang Hasil Penjualan: Rp <span id="hasil-penjualan"></span></p>
-            <p>Total Modal: Rp <span id="total-modal"></span></p>
-            <p>Total Keuntungan: Rp <span id="total-untung"></span></p>
+<body>
+
+    <div class="container">
+        <h1>Jual Produk Non-Organik per Kg</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Produk</th>
+                    <th>Harga per Kg (Rp)</th>
+                    <th>Jumlah (Kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kain</td>
+                    <td>Rp 12.000</td>
+                    <td><input type="number" id="kain" value="0" min="0" onchange="hitungTotal()"></td>
+                </tr>
+                <tr>
+                    <td>Karet</td>
+                    <td>Rp 10.000</td>
+                    <td><input type="number" id="karet" value="0" min="0" onchange="hitungTotal()"></td>
+                </tr>
+                <tr>
+                    <td>Plastik</td>
+                    <td>Rp 5.000</td>
+                    <td><input type="number" id="plastik" value="0" min="0" onchange="hitungTotal()"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="total" id="totalHarga">Total Harga: Rp 0</p>
+
+        <a id="waLink" class="btn" href="#" target="_blank">Beli Sekarang</a>
+
+        <div class="contact">
+            <p>Hubungi kami: <a href="tel:+6289621198495">089621198495</a></p>
         </div>
     </div>
 
     <script>
-        function hitung() {
-            var beratKardus = document.getElementById("berat").value;
+        function hitungTotal() {
+            const kainHarga = 12000;
+            const karetHarga = 10000;
+            const plastikHarga = 5000;
 
-            // Angka tetap: 1 kg kardus menghasilkan 10 bingkai foto
-            var barangPerKg = 10;
+            const kainJumlah = document.getElementById('kain').value;
+            const karetJumlah = document.getElementById('karet').value;
+            const plastikJumlah = document.getElementById('plastik').value;
 
-            // Hitung jumlah produk yang dapat dihasilkan
-            var jumlahTotalProduk = beratKardus * barangPerKg;
-            document.getElementById("jumlah-produk").innerHTML = jumlahTotalProduk;
+            const total = (kainHarga * kainJumlah) + (karetHarga * karetJumlah) + (plastikHarga * plastikJumlah);
 
-            // Hitung hasil penjualan
-            var hargaPerProduk = 25000;  // Harga jual per bingkai foto
-            var hasilPenjualan = jumlahTotalProduk * hargaPerProduk;
-            document.getElementById("hasil-penjualan").innerHTML = hasilPenjualan;
+            document.getElementById('totalHarga').innerText = 'Total Harga: Rp ' + total.toLocaleString();
 
-            // Hitung modal
-            var modalPerProduk = 5000;  // Modal produksi per bingkai foto
-            var totalModal = jumlahTotalProduk * modalPerProduk;
-            document.getElementById("total-modal").innerHTML = totalModal;
-
-            // Hitung keuntungan
-            var totalUntung = hasilPenjualan - totalModal;
-            document.getElementById("total-untung").innerHTML = totalUntung;
-
-            // Tampilkan hasil
-            document.getElementById("result").style.display = "block";
+            const waLink = `https://wa.me/6289621198495?text=Saya%20ingin%20membeli%20produk%20dengan%20rincian:%0A- Kain: ${kainJumlah} Kg%0A- Karet: ${karetJumlah} Kg%0A- Plastik: ${plastikJumlah} Kg%0ATotal: Rp ${total.toLocaleString()}`;
+            document.getElementById('waLink').href = waLink;
         }
     </script>
+
 </body>
+
 </html>
